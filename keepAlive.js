@@ -5,7 +5,7 @@ app.get("/", (req, res) => {
   res.send("Bot Online")
 })
 
-app.listen(3000, () => {
+app.listen(3001, () => {
   console.log("Website ready")
 })
 
