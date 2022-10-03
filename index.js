@@ -18,7 +18,7 @@ console.red = (text) => {
   console.log(chalk.red(text))
 }
 
-require("./keepAlive.js")
+//require("./keepAlive.js")
 require("dotenv").config()
 let token = process.env.TOKEN
 let clientid = process.env.ClientId
