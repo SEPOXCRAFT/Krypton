@@ -9,5 +9,3 @@ module.exports = async (client) => {
 		});
 	}, 10000)
 };
-
-module.exports.client = client;
