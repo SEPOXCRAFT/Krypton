@@ -28,8 +28,17 @@ const client = new Discord.Client({
 		Discord.GatewayIntentBits.Guilds,
 		Discord.GatewayIntentBits.GuildMessages,
 		Discord.GatewayIntentBits.MessageContent,
+		Discord.GatewayIntentBits.GuildVoiceStates
 		Discord.GatewayIntentBits.GuildMembers,
 	]
+})
+
+const { DisTube } = require("distube")
+client.music = new DisTube(client, {
+	leaveOnStop: false,
+	emitNewSongOnly: true,
+	emitAddSongWhenCreatingQueue: false,
+	emitAddListWhenCreatingQueue: false,
 })
 
 client.commands = global.commands = new Discord.Collection();
@@ -49,6 +58,18 @@ if (true) {
 			delete require.cache[require.resolve(`./events/${event}`)];
 		});
 	};
+	
+	const distubeRegister = () => {
+		let eventDir = Path.resolve(__dirname, './distube');
+		if (!fs.existsSync(eventsDir)) return console.red("I could not find a distube directory. (looking to read a distube dir.)");
+		fs.readdirSync(eventsDir, { encoding: "utf-8" }).filter((cmd) => cmd.split(".").pop() === "js").forEach((event) => {
+			let totalEventevents = require(`./distube/${event}`);
+			if (!totalEventevents) return console.red("No distube events in the code");
+			console.green(`${event} was saved.`);
+			client.music.on(event.split('.')[0], totalEventevents.bind(null, client));
+			delete require.cache[require.resolve(`./distube/${event}`)];
+		});
+	}
 
 	const commandsRegister = () => {
 		let commandsDir = Path.resolve(__dirname, './commands');
@@ -65,7 +86,7 @@ if (true) {
 			delete require.cache[require.resolve(`./commands/${command}`)];
 		});
 	};
-
+	
 	const rest = new Discord.REST({ version: '10' }).setToken(token);
 
 	const slashCommandsRegister = async () => {
@@ -86,6 +107,7 @@ if (true) {
 	};
 
 	eventsRegister();
+	distubeRegister();
 	commandsRegister();
 	slashCommandsRegister();
 
