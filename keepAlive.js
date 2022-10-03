@@ -5,7 +5,7 @@ app.get("/", (req, res) => {
   res.send("Bot Online")
 })
 
-app.listen(3001, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log("Website ready")
 })
 
