@@ -22,6 +22,7 @@
     "ffmpeg": "^0.0.4",
     "ffmpeg-static": "^4.4.1",
     "fs": "^0.0.1-security",
+    "libsodium": "^0.7.10",
     "path": "^0.12.7",
     "sodium": "^3.0.2"
   }
