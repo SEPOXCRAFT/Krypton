@@ -35,7 +35,11 @@ const client = new Discord.Client({
 
 const { DisTube } = require("distube")
 client.music = new DisTube(client, {
-	leaveOnStop: false,
+	searchSongs: 5,
+	searchCooldown: 10,
+	leaveOnEmpty: false,
+	leaveOnFinish: false,
+	leaveOnStop: true,
 	emitNewSongOnly: true,
 	emitAddSongWhenCreatingQueue: false,
 	emitAddListWhenCreatingQueue: false,
@@ -60,7 +64,7 @@ if (true) {
 	};
 	
 	const distubeRegister = () => {
-		let eventDir = Path.resolve(__dirname, './distube');
+		let eventsDir = Path.resolve(__dirname, './distube');
 		if (!fs.existsSync(eventsDir)) return console.red("I could not find a distube directory. (looking to read a distube dir.)");
 		fs.readdirSync(eventsDir, { encoding: "utf-8" }).filter((cmd) => cmd.split(".").pop() === "js").forEach((event) => {
 			let totalEventevents = require(`./distube/${event}`);
