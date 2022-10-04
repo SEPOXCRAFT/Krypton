@@ -6,7 +6,7 @@ module.exports = {
 		name: "pagina",
 		description: "Página de la queue",
 		type: 4,
-		required: true,
+		required: false,
 	}
 	],
 	config: {
@@ -20,7 +20,7 @@ module.exports = {
 		
 		await interaction.deferReply({ ephemeral: false });
 
-		const args = interaction.options.getInteger("pagina");
+		const args = interaction.options.getInteger("pagina") || 1;
 
         const queue = client.music.getQueue(interaction);
         if (!queue) return interaction.editReply(`No se está reproduciendo ninguna canción ahora mismo`);

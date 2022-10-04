@@ -1,6 +1,7 @@
 const Discord = require("discord.js")
 const fs = require("fs")
 const Path = require("path")
+const config = require(Path.resolve(__dirname, "../Batch Files/config.js"));
 global.chalk = require("chalk")
 console.info = (text) => {
 	console.blue(text)
@@ -19,9 +20,8 @@ console.red = (text) => {
 }
 
 require("./keepAlive.js")
-require("dotenv").config()
-let token = process.env.TOKEN
-let clientid = process.env.ClientId
+let token = process.env.TOKEN || config.TOKEN;
+let clientid = process.env.ClientId || config.ClientId;
 
 const client = new Discord.Client({
 	intents: [
@@ -38,7 +38,7 @@ client.music = new DisTube(client, {
 	searchSongs: 5,
 	searchCooldown: 10,
 	leaveOnEmpty: false,
-	leaveOnFinish: false,
+	leaveOnFinish: true,
 	leaveOnStop: true,
 	emitNewSongOnly: true,
 	emitAddSongWhenCreatingQueue: false,
